@@ -12,8 +12,8 @@ export default function PremiumExperience() {
   return (
     <>
       <section className="relative overflow-hidden bg-[#102f29] py-20 text-white sm:py-28">
-        <div className="absolute -left-40 top-0 h-[34rem] w-[34rem] rounded-full bg-[#b82025]/10 blur-[100px]" />
-        <div className="absolute -right-40 bottom-0 h-[34rem] w-[34rem] rounded-full bg-[#c79b52]/10 blur-[100px]" />
+        <div className="absolute -left-40 top-0 h-[34rem] w-[34rem] rounded-full bg-[#902b36]/10 blur-[100px]" />
+        <div className="absolute -right-40 bottom-0 h-[34rem] w-[34rem] rounded-full bg-[#d8b678]/10 blur-[100px]" />
         <div className="page-shell relative">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
@@ -24,7 +24,7 @@ export default function PremiumExperience() {
             <div>
               <p className="eyebrow">The Enagic experience</p>
               <h2 className="mt-4 text-4xl font-semibold leading-[1.08] sm:text-6xl">
-                A clearer path to <span className="italic text-[#d7b876]">the right system.</span>
+                A clearer path to <span className="italic text-[#d8b678]">the right system.</span>
               </h2>
             </div>
             <p className="max-w-xl text-base leading-8 text-white/48 lg:ml-auto">
@@ -40,7 +40,7 @@ export default function PremiumExperience() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.12, duration: 0.65 }}
-                className="group relative bg-[#14362f] p-8 transition-colors duration-500 hover:bg-[#19453b] sm:p-10"
+                className="group relative bg-[#173d35] p-8 transition-colors duration-500 hover:bg-[#902b36] sm:p-10"
               >
                 <div className="flex items-center justify-between">
                   <span className="grid h-12 w-12 place-items-center rounded-full border border-[#d8b678]/25 text-[#d8b678]">
@@ -50,7 +50,7 @@ export default function PremiumExperience() {
                 </div>
                 <h3 className="mt-12 text-2xl font-semibold">{title}</h3>
                 <p className="mt-4 max-w-xs text-sm leading-7 text-white/45">{text}</p>
-                <div className="mt-8 h-px w-10 bg-[#b82025] transition-all duration-500 group-hover:w-full" />
+                <div className="mt-8 h-px w-10 bg-[#902b36] transition-all duration-500 group-hover:w-full" />
               </motion.div>
             ))}
           </div>
@@ -71,8 +71,11 @@ export default function PremiumExperience() {
               “Not just a water system. A considered investment in the way your family lives every day.”
             </blockquote>
             <div className="mt-10 flex items-center gap-4">
-              <img src="/enagic-bharat-logo.svg" alt="" className="h-12 w-12 rounded-md" />
-              <div><strong className="block">Enagic Bharat</strong><span className="text-sm text-white/60">Jaipur Experience Centre</span></div>
+              <img src="/enagic-bharat-horizontal.png" alt="Enagic Bharat" className="h-14 w-auto max-w-[240px] object-contain" />
+              <div>
+                <strong className="block tracking-[.08em]">ENAGIC BHARAT</strong>
+                <span className="text-sm text-white/60">Jaipur Experience Centre</span>
+              </div>
             </div>
           </motion.div>
 

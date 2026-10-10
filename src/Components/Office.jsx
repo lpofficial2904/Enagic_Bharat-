@@ -13,7 +13,7 @@ const info = [
 ];
 export default function Office() {
   return (
-    <main className="bg-[#f7f5ef] pb-24 pt-36">
+    <main className="bg-[#f4f6f3] pb-24 pt-36">
       <div className="page-shell">
         <motion.div
           initial={{ opacity: 0, y: 25 }}

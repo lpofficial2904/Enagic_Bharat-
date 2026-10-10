@@ -24,7 +24,7 @@ export default function TrustBar() {
         {loop.map(([Icon, label], index) => (
           <div key={`${label}-${index}`} className="flex items-center">
             <div className="flex items-center gap-3 px-7 text-xs font-extrabold uppercase tracking-[.15em] text-black/60 sm:px-10">
-              <Icon size={17} strokeWidth={1.7} className="text-[#946c32]" />
+              <Icon size={17} strokeWidth={1.7} className="text-[#902b36]" />
               <span className="whitespace-nowrap">{label}</span>
             </div>
             <Circle size={5} fill="currentColor" className="text-[#902b36]" />

@@ -50,14 +50,14 @@ export default function ProductDetails() {
                   </div>
                 ))}
               </div>
-              <div className="mt-7 flex items-center gap-2 text-sm text-black/50"><ShieldCheck size={18} className="text-[#946c32]"/> Personal selection and setup guidance</div>
+              <div className="mt-7 flex items-center gap-2 text-sm text-black/50"><ShieldCheck size={18} className="text-[#902b36]"/> Personal selection and setup guidance</div>
             </div>
           </div>
         </motion.div>
         <div className="mt-6 overflow-hidden rounded-lg border border-[#173d35]/10 bg-white">
           <button onClick={()=>setOpen(v=>!v)} className="flex w-full items-center justify-between p-6 text-left sm:p-8"><span className="text-2xl font-semibold">Technical specifications</span><motion.span animate={{rotate:open?180:0}}><ChevronDown/></motion.span></button>
           <AnimatePresence>{open && <motion.div initial={{height:0,opacity:0}} animate={{height:"auto",opacity:1}} exit={{height:0,opacity:0}} className="overflow-hidden"><div className="grid gap-px bg-black/[.07] border-t border-black/[.07] sm:grid-cols-2">
-            {product.specifications.map((s,i)=><div key={i} className="bg-white p-5 sm:p-6"><span className="block text-xs font-bold uppercase tracking-widest text-[#946c32]">{s.title}</span><span className="mt-2 block leading-6 text-black/65">{s.value}</span></div>)}
+            {product.specifications.map((s,i)=><div key={i} className="bg-white p-5 sm:p-6"><span className="block text-xs font-bold uppercase tracking-widest text-[#902b36]">{s.title}</span><span className="mt-2 block leading-6 text-black/65">{s.value}</span></div>)}
           </div></motion.div>}</AnimatePresence>
         </div>
       </div>

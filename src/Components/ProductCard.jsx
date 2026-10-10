@@ -14,7 +14,7 @@ export default function ProductCard({ product, index=0 }) {
         <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent"/>
       </div>
       <div className="flex flex-1 flex-col p-6">
-        <p className="text-[11px] font-bold uppercase tracking-[.18em] text-[#946c32]">Japanese engineering</p>
+        <p className="text-[11px] font-bold uppercase tracking-[.18em] text-[#902b36]">Japanese engineering</p>
         <h3 className="mt-2 text-2xl font-semibold">{product.name}</h3>
         <p className="mt-3 line-clamp-2 text-sm leading-6 text-black/50">{product.description}</p>
         <div className="mt-auto flex items-center justify-between border-t border-[#173d35]/10 pt-5">

@@ -27,13 +27,10 @@ export default function Footer() {
           <div>
             <Link to="/" className="flex items-center gap-3">
               <img
-                src="/enagic-bharat-logo.svg"
-                alt=""
-                className="h-10 w-10 rounded-[10px]"
+                src="/enagic-bharat-horizontal.png"
+                alt="Enagic Bharat"
+                className="h-16 w-auto max-w-[280px] object-contain"
               />
-              <span className="font-[Manrope] font-extrabold tracking-[.12em]">
-                ENAGIC BHARAT
-              </span>
             </Link>
             <p className="mt-5 text-sm leading-7 text-white/45">
               Premium Japanese water ionisation technology for healthier
@@ -91,7 +88,7 @@ export default function Footer() {
                   href={url}
                   target="_blank"
                   rel="noreferrer"
-                  className="grid h-11 w-11 place-items-center rounded-full border border-white/15 transition hover:border-[#b82025] hover:bg-[#b82025]"
+                  className="grid h-11 w-11 place-items-center rounded-full border border-white/15 transition hover:border-[#902b36] hover:bg-[#902b36]"
                 >
                   <Icon size={18} />
                 </a>

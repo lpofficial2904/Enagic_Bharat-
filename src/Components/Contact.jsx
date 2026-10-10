@@ -49,6 +49,55 @@ const slots = [
   "08:00 PM - 10:00 PM",
 ];
 
+const validators = {
+  name: (value) => {
+    const trimmed = value.trim();
+    if (!trimmed) return "Please enter your full name.";
+    if (trimmed.length < 3) return "Name must be at least 3 characters.";
+    if (!/^[a-zA-Z\s.'-]+$/.test(trimmed)) return "Name can only use letters and spaces.";
+    return "";
+  },
+  email: (value) => {
+    const trimmed = value.trim();
+    if (!trimmed) return "Please enter your email address.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)) return "Please enter a valid email address.";
+    return "";
+  },
+  phone: (value) => {
+    const digits = value.replace(/\D/g, "");
+    if (!digits) return "Please enter your phone number.";
+    if (!/^[6-9]\d{9}$/.test(digits.slice(-10))) return "Please enter a valid 10 digit Indian mobile number.";
+    return "";
+  },
+  pincode: (value) => {
+    const trimmed = value.trim();
+    if (!trimmed) return "Please enter your pincode.";
+    if (!/^[1-9]\d{5}$/.test(trimmed)) return "Please enter a valid 6 digit pincode.";
+    return "";
+  },
+  city: (value) => {
+    const trimmed = value.trim();
+    if (!trimmed) return "Please enter your full address.";
+    if (trimmed.length < 8) return "Address must be at least 8 characters.";
+    return "";
+  },
+  timeSlot: (value) => (!value ? "Please choose a preferred time slot." : ""),
+  message: (value) => {
+    const trimmed = value.trim();
+    if (!trimmed) return "Please tell us how we can help.";
+    if (trimmed.length < 5) return "Message must be at least 5 characters.";
+    return "";
+  },
+};
+
+function validateForm(values) {
+  return Object.fromEntries(
+    Object.entries(validators)
+      .map(([key, validator]) => [key, validator(values[key] ?? "")])
+      .filter(([, message]) => message),
+  );
+}
+
 export default function Contact() {
   const [form, setForm] = useState({
     name: "",
@@ -59,24 +108,43 @@ export default function Contact() {
     timeSlot: "",
     message: "",
   });
+  const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const update = (key) => (event) =>
-    setForm((current) => ({ ...current, [key]: event.target.value }));
+  const update = (key) => (event) => {
+    const value = event.target.value;
+    setForm((current) => ({ ...current, [key]: value }));
+    setErrors((current) => {
+      if (!current[key]) return current;
+      const message = validators[key]?.(value) ?? "";
+      const next = { ...current };
+      if (message) next[key] = message;
+      else delete next[key];
+      return next;
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const nextErrors = validateForm(form);
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
+      toast.error("Please correct the highlighted details.");
+      return;
+    }
+
     setIsSubmitting(true);
-    const bookingPromise = fetch(
-      "https://enagic-bharat.vercel.app/api/contact",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      },
-    ).then(async (response) => {
-      const data = await response.json();
-      if (!response.ok || !data.success)
+    const bookingPromise = fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    }).then(async (response) => {
+      const text = await response.text();
+      const data = text ? JSON.parse(text) : {};
+      if (!response.ok || !data.success) {
+        if (data.errors) setErrors(data.errors);
         throw new Error(data.message || "Unable to book your demo");
+      }
       return data;
     });
 
@@ -98,6 +166,7 @@ export default function Contact() {
         timeSlot: "",
         message: "",
       });
+      setErrors({});
     } catch (error) {
       console.error("Contact form submission failed:", error);
     } finally {
@@ -106,10 +175,10 @@ export default function Contact() {
   };
 
   return (
-    <main className="overflow-hidden bg-[#f7f5ef] pt-24">
-      <section className="grain relative overflow-hidden bg-[#151512] pb-32 pt-20 text-white sm:pt-28">
-        <div className="absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-[#b82025]/15 blur-[100px]" />
-        <div className="absolute right-[8%] top-[5%] h-80 w-80 rounded-full bg-[#c79b52]/15 blur-[100px]" />
+    <main className="overflow-hidden bg-[#f4f6f3] pt-24">
+      <section className="grain relative overflow-hidden bg-[#0d2924] pb-32 pt-20 text-white sm:pt-28">
+        <div className="absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-[#902b36]/15 blur-[100px]" />
+        <div className="absolute right-[8%] top-[5%] h-80 w-80 rounded-full bg-[#d8b678]/15 blur-[100px]" />
         <motion.div
           initial="hidden"
           animate="visible"
@@ -174,7 +243,7 @@ export default function Contact() {
                 transition={{ delay: 0.35 + index * 0.1 }}
                 className="group flex items-center gap-4 rounded-[1.6rem] border border-black/[.07] bg-white p-5 shadow-[0_20px_55px_rgba(27,25,20,.1)] transition hover:-translate-y-1 hover:shadow-[0_26px_65px_rgba(27,25,20,.14)] sm:p-6"
               >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#eee8dc] text-[#a77a37] transition group-hover:bg-[#b82025] group-hover:text-white">
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#eee8dc] text-[#a77a37] transition group-hover:bg-[#902b36] group-hover:text-white">
                   <Icon size={19} />
                 </span>
                 <span>
@@ -190,7 +259,7 @@ export default function Contact() {
           </div>
 
           <div className="mt-8 grid overflow-hidden rounded-[2.5rem] border border-black/[.07] bg-white shadow-[0_30px_90px_rgba(30,28,22,.09)] lg:grid-cols-[.68fr_1.32fr]">
-            <div className="relative overflow-hidden bg-[#201f1a] p-8 text-white sm:p-11">
+            <div className="relative overflow-hidden bg-[#0d2924] p-8 text-white sm:p-11">
               <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full border-[45px] border-[#d8b678]/5" />
               <p className="eyebrow">What to expect</p>
               <h2 className="mt-5 text-3xl font-semibold leading-tight sm:text-4xl">
@@ -231,7 +300,7 @@ export default function Contact() {
             </div>
 
             <div className="relative p-6 sm:p-10 lg:p-12">
-              <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[#c79b52]/10 blur-3xl" />
+              <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[#d8b678]/10 blur-3xl" />
               <div className="relative flex flex-col justify-between gap-4 border-b border-black/[.07] pb-7 sm:flex-row sm:items-end">
                 <div>
                   <p className="eyebrow">Reserve your experience</p>
@@ -247,56 +316,67 @@ export default function Contact() {
 
               <form onSubmit={handleSubmit} className="relative mt-8 space-y-5">
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <Field label="Full name">
+                  <Field label="Full name" error={errors.name}>
                     <input
                       className="input-premium"
                       required
+                      minLength={3}
+                      autoComplete="name"
                       value={form.name}
                       onChange={update("name")}
                       placeholder="Your full name"
                     />
                   </Field>
-                  <Field label="Email address">
+                  <Field label="Email address" error={errors.email}>
                     <input
                       className="input-premium"
                       required
                       type="email"
+                      autoComplete="email"
                       value={form.email}
                       onChange={update("email")}
                       placeholder="you@example.com"
                     />
                   </Field>
-                  <Field label="Phone number">
+                  <Field label="Phone number" error={errors.phone}>
                     <input
                       className="input-premium"
                       required
                       type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      pattern="(?:\+91[\s-]?)?[6-9][0-9\s-]{9,12}"
                       value={form.phone}
                       onChange={update("phone")}
                       placeholder="+91 98765 43210"
                     />
                   </Field>
-                  <Field label="Pincode">
+                  <Field label="Pincode" error={errors.pincode}>
                     <input
                       className="input-premium"
                       required
                       inputMode="numeric"
+                      maxLength={6}
+                      pattern="[1-9][0-9]{5}"
+                      autoComplete="postal-code"
                       value={form.pincode}
                       onChange={update("pincode")}
                       placeholder="302020"
                     />
                   </Field>
                 </div>
-                <Field label="Full address">
+                <Field label="Full address" error={errors.city}>
                   <input
                     className="input-premium"
                     required
+                    minLength={8}
+                    autoComplete="street-address"
                     value={form.city}
                     onChange={update("city")}
                     placeholder="Your address and city"
                   />
                 </Field>
-                <Field label="Preferred time">
+                <Field label="Preferred time" error={errors.timeSlot}>
                   <select
                     className="input-premium"
                     required
@@ -309,11 +389,12 @@ export default function Contact() {
                     ))}
                   </select>
                 </Field>
-                <Field label="How can we help?">
+                <Field label="How can we help?" error={errors.message}>
                   <textarea
                     className="input-premium resize-none"
                     rows="4"
                     required
+                    minLength={5}
                     value={form.message}
                     onChange={update("message")}
                     placeholder="Tell us about your requirements or questions..."
@@ -339,7 +420,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="mt-16 flex flex-col items-center justify-between gap-7 rounded-[2rem] border border-black/[.07] bg-[#ede9df] p-7 sm:flex-row sm:p-9">
+          <div className="mt-16 flex flex-col items-center justify-between gap-7 rounded-[2rem] border border-black/[.07] bg-[#e7eeea] p-7 sm:flex-row sm:p-9">
             <div>
               <p className="eyebrow">Stay connected</p>
               <h3 className="mt-2 text-2xl font-semibold">
@@ -368,7 +449,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white text-black/65 shadow-sm transition hover:bg-[#171714] hover:text-white"
+                  className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white text-black/65 shadow-sm transition hover:bg-[#0d2924] hover:text-white"
                 >
                   <Icon />
                 </motion.a>
@@ -381,13 +462,18 @@ export default function Contact() {
   );
 }
 
-function Field({ label, children }) {
+function Field({ label, error, children }) {
   return (
     <label className="block">
       <span className="mb-2 block text-xs font-bold uppercase tracking-[.1em] text-black/45">
         {label}
       </span>
       {children}
+      {error ? (
+        <span className="mt-2 block text-xs font-semibold text-[#902b36]">
+          {error}
+        </span>
+      ) : null}
     </label>
   );
 }

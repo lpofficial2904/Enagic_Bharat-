@@ -17,7 +17,7 @@ export default function Slider() {
             <Sparkles size={14}/> Japanese engineering, thoughtfully guided
           </motion.div>
           <motion.h1 variants={{hidden:{opacity:0,y:35},show:{opacity:1,y:0,transition:{duration:.8,ease:[.22,1,.36,1]}}}} className="max-w-3xl text-[2.65rem] font-semibold leading-[1.02] sm:text-6xl lg:text-7xl xl:text-[7rem]">
-            Kangen Water<br/><span className="font-normal italic text-[#d7b876]">for your home.</span>
+            Kangen Water<br/><span className="font-normal italic text-[#d8b678]">for your home.</span>
           </motion.h1>
           <motion.p variants={{hidden:{opacity:0,y:20},show:{opacity:1,y:0}}} className="mt-5 max-w-xl text-sm leading-7 text-white/64 sm:mt-7 sm:text-lg sm:leading-8">
             Explore Enagic Kangen Water machines in India. Compare water ionizer models and prices, then book a personal demo with our Jaipur team.
@@ -27,12 +27,12 @@ export default function Slider() {
             <Link to="/contact" className="flex w-full items-center justify-center gap-3 rounded-full border border-white/20 px-6 py-4 font-semibold transition hover:bg-white hover:text-black sm:w-auto"><Play size={17} fill="currentColor"/> Book a Kangen Water demo</Link>
           </motion.div>
           <motion.div variants={{hidden:{opacity:0},show:{opacity:1}}} className="mt-9 grid grid-cols-1 gap-3 border-t border-white/10 pt-5 text-xs text-white/55 min-[390px]:grid-cols-2 sm:mt-12 sm:flex sm:flex-wrap sm:gap-x-8 sm:gap-y-3 sm:pt-6 sm:text-sm">
-            {["Japanese-built systems","Personal demonstrations","Local guidance"].map(x=><span key={x} className="flex items-center gap-2"><ShieldCheck size={16} className="text-[#d7b876]"/>{x}</span>)}
+            {["Japanese-built systems","Personal demonstrations","Local guidance"].map(x=><span key={x} className="flex items-center gap-2"><ShieldCheck size={16} className="text-[#d8b678]"/>{x}</span>)}
           </motion.div>
         </motion.div>
         <motion.div initial={{opacity:0,scale:.94}} animate={{opacity:1,scale:1}} transition={{duration:1.1,delay:.2,ease:[.22,1,.36,1]}} className="relative order-1 min-h-[440px] sm:min-h-[620px] lg:order-2 lg:min-h-[690px]">
           <div className="absolute inset-x-[7%] bottom-[3%] top-[4%] border border-white/10 bg-white/[.035] backdrop-blur-sm" />
-          <div className="absolute left-[7%] top-[4%] z-20 bg-[#d7b876] px-4 py-2 text-[10px] font-extrabold uppercase tracking-[.18em] text-[#0d2924]">
+          <div className="absolute left-[7%] top-[4%] z-20 bg-[#d8b678] px-4 py-2 text-[10px] font-extrabold uppercase tracking-[.18em] text-[#0d2924]">
             Featured collection
           </div>
 
@@ -40,7 +40,7 @@ export default function Slider() {
             <Link to="/products" aria-label="View the complete Enagic product range" className="relative block h-[255px] sm:h-[390px]">
               <img src={completeRange} alt="Complete Enagic water ionizer range" className="h-full w-full object-contain p-4 mix-blend-multiply sm:p-7" />
               <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-[#102f29] via-[#102f29]/92 to-transparent px-5 pb-5 pt-16 text-white sm:px-7">
-                <div><span className="text-[8px] font-bold uppercase tracking-[.16em] text-[#d7b876] sm:text-[10px]">Japanese water systems</span><strong className="mt-1 block text-base sm:text-2xl">The complete Enagic range</strong></div>
+                <div><span className="text-[8px] font-bold uppercase tracking-[.16em] text-[#d8b678] sm:text-[10px]">Japanese water systems</span><strong className="mt-1 block text-base sm:text-2xl">The complete Enagic range</strong></div>
                 <span className="hidden items-center gap-2 text-xs font-bold text-white/70 transition group-hover:text-white sm:flex">Compare models <ArrowRight size={15}/></span>
               </div>
             </Link>
@@ -63,7 +63,7 @@ export default function Slider() {
           <motion.div animate={{y:[0,6,0]}} transition={{duration:6.2,repeat:Infinity,ease:"easeInOut"}} className="group absolute bottom-[1%] right-[1%] z-20 w-[31%] overflow-hidden rounded-lg border border-white/15 bg-[#edf3ef] shadow-[0_24px_55px_rgba(0,0,0,.38)]">
             <Link to="/product/5" aria-label="View Leveluk Jr IV details" className="block">
               <img src={jrIv} alt="Leveluk Jr IV water ionizer" className="aspect-[4/3] w-full object-contain p-4 mix-blend-multiply transition-transform duration-700 ease-in-out group-hover:rotate-[360deg]" />
-              <div className="flex items-center justify-between bg-[#946c32] px-3 py-2.5"><strong className="block text-[10px] sm:text-sm">Leveluk Jr IV</strong><ArrowRight size={13}/></div>
+              <div className="flex items-center justify-between bg-[#902b36] px-3 py-2.5"><strong className="block text-[10px] sm:text-sm">Leveluk Jr IV</strong><ArrowRight size={13}/></div>
             </Link>
           </motion.div>
         </motion.div>

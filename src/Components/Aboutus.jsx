@@ -65,9 +65,9 @@ export default function Aboutus() {
   const heroY = useTransform(scrollY, [0, 700], [0, 120]);
 
   return (
-    <main className={`overflow-hidden ${full ? "bg-[#f7f5ef] pt-24" : ""}`}>
+    <main className={`overflow-hidden ${full ? "bg-[#f4f6f3] pt-24" : ""}`}>
       {full && (
-        <section className="grain relative min-h-[76vh] overflow-hidden bg-[#151512] text-white">
+        <section className="grain relative min-h-[76vh] overflow-hidden bg-[#0d2924] text-white">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_30%,rgba(199,155,82,.23),transparent_31%),radial-gradient(circle_at_12%_90%,rgba(184,32,37,.16),transparent_28%)]" />
           <div
             className="absolute inset-0 opacity-[.06]"
@@ -121,7 +121,7 @@ export default function Aboutus() {
               className="relative hidden min-h-[530px] items-center justify-center lg:flex"
             >
               <div className="absolute h-96 w-96 rounded-full border border-[#d8b678]/15" />
-              <div className="absolute h-72 w-72 rounded-full bg-[#c79b52]/15 blur-[70px]" />
+              <div className="absolute h-72 w-72 rounded-full bg-[#d8b678]/15 blur-[70px]" />
               <motion.img
                 animate={{ y: [0, -10, 0] }}
                 transition={{
@@ -153,7 +153,7 @@ export default function Aboutus() {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            <div className="absolute -left-6 -top-6 h-28 w-28 rounded-full border border-[#c79b52]/25" />
+            <div className="absolute -left-6 -top-6 h-28 w-28 rounded-full border border-[#d8b678]/25" />
             <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
               <motion.img
                 whileHover={{ scale: 1.045 }}
@@ -237,7 +237,7 @@ export default function Aboutus() {
 
       {full && (
         <>
-          <section className="bg-[#151512] py-28 text-white">
+          <section className="bg-[#0d2924] py-28 text-white">
             <div className="page-shell grid gap-16 lg:grid-cols-[.72fr_1.28fr]">
               <motion.div
                 initial={{ opacity: 0, y: 25 }}
@@ -280,13 +280,13 @@ export default function Aboutus() {
             </div>
           </section>
 
-          <section className="bg-[#f7f5ef] py-28">
+          <section className="bg-[#f4f6f3] py-28">
             <div className="page-shell grid gap-5 lg:grid-cols-2">
               <motion.div
                 initial={{ opacity: 0, x: -25 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="rounded-[2.5rem] bg-[#b82025] p-9 text-white sm:p-12"
+                className="rounded-[2.5rem] bg-[#902b36] p-9 text-white sm:p-12"
               >
                 <Target className="text-white/65" />
                 <p className="mt-12 text-xs font-bold uppercase tracking-[.18em] text-white/55">
@@ -315,7 +315,7 @@ export default function Aboutus() {
             </div>
           </section>
 
-          <section className="grain relative overflow-hidden bg-[#b82025] py-20 text-white">
+          <section className="grain relative overflow-hidden bg-[#902b36] py-20 text-white">
             <div className="absolute right-0 top-0 h-80 w-80 rounded-full bg-[#d8b678]/15 blur-[80px]" />
             <div className="page-shell relative flex flex-col items-start justify-between gap-9 md:flex-row md:items-center">
               <div>
@@ -328,7 +328,7 @@ export default function Aboutus() {
               </div>
               <Link
                 to="/contact"
-                className="flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-4 font-bold text-[#171714] transition hover:-translate-y-1 hover:shadow-2xl"
+                className="flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-4 font-bold text-[#0d2924] transition hover:-translate-y-1 hover:shadow-2xl"
               >
                 Book a Kangen Water demo <ArrowRight size={18} />
               </Link>
