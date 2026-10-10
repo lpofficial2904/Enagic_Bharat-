@@ -140,7 +140,16 @@ export default function Contact() {
       body: JSON.stringify(form),
     }).then(async (response) => {
       const text = await response.text();
-      const data = text ? JSON.parse(text) : {};
+      let data = {};
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        data = {
+          message: response.status === 404
+            ? "Contact API is not available on this deployment."
+            : "Unexpected server response. Please try again.",
+        };
+      }
       if (!response.ok || !data.success) {
         if (data.errors) setErrors(data.errors);
         throw new Error(data.message || "Unable to book your demo");
@@ -345,7 +354,7 @@ export default function Contact() {
                       type="tel"
                       inputMode="tel"
                       autoComplete="tel"
-                      pattern="(?:\+91[\s-]?)?[6-9][0-9\s-]{9,12}"
+                      pattern="(?:\+91[ -]?)?[6-9][0-9 -]{9,12}"
                       value={form.phone}
                       onChange={update("phone")}
                       placeholder="+91 98765 43210"
