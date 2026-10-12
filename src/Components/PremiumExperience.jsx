@@ -71,7 +71,7 @@ export default function PremiumExperience() {
               “Not just a water system. A considered investment in the way your family lives every day.”
             </blockquote>
             <div className="mt-10 flex items-center gap-4">
-              <img src="/enagic-bharat-horizontal.png" alt="Enagic Bharat" className="h-14 w-auto max-w-[240px] object-contain" />
+              <img src="/enagic-bharat-horizontal.svg" alt="Enagic Bharat" className="h-14 w-auto max-w-[240px] rounded-2xl bg-white/95 p-2 object-contain" />
               <div>
                 <strong className="block tracking-[.08em]">ENAGIC BHARAT</strong>
                 <span className="text-sm text-white/60">Jaipur Experience Centre</span>

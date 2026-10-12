@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
   ArrowRight,
   CalendarCheck,
+  CheckCircle2,
   Clock3,
   Mail,
   MapPin,
@@ -49,6 +51,8 @@ const slots = [
   "08:00 PM - 10:00 PM",
 ];
 
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
+
 const validators = {
   name: (value) => {
     const trimmed = value.trim();
@@ -66,7 +70,7 @@ const validators = {
   phone: (value) => {
     const digits = value.replace(/\D/g, "");
     if (!digits) return "Please enter your phone number.";
-    if (!/^[6-9]\d{9}$/.test(digits.slice(-10))) return "Please enter a valid 10 digit Indian mobile number.";
+    if (!/^[6-9]\d{9}$/.test(digits)) return "Please enter a valid 10 digit Indian mobile number.";
     return "";
   },
   pincode: (value) => {
@@ -99,6 +103,7 @@ function validateForm(values) {
 }
 
 export default function Contact() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -110,6 +115,18 @@ export default function Contact() {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  useEffect(() => {
+    if (!showSuccessPopup) return undefined;
+
+    const redirectTimer = window.setTimeout(() => {
+      navigate("/");
+    }, 5000);
+
+    return () => window.clearTimeout(redirectTimer);
+  }, [navigate, showSuccessPopup]);
+
   const update = (key) => (event) => {
     const value = event.target.value;
     setForm((current) => ({ ...current, [key]: value }));
@@ -119,6 +136,19 @@ export default function Contact() {
       const next = { ...current };
       if (message) next[key] = message;
       else delete next[key];
+      return next;
+    });
+  };
+
+  const updatePhone = (event) => {
+    const value = event.target.value.replace(/\D/g, "").slice(0, 10);
+    setForm((current) => ({ ...current, phone: value }));
+    setErrors((current) => {
+      if (!current.phone) return current;
+      const message = validators.phone(value);
+      const next = { ...current };
+      if (message) next.phone = message;
+      else delete next.phone;
       return next;
     });
   };
@@ -134,7 +164,7 @@ export default function Contact() {
     }
 
     setIsSubmitting(true);
-    const bookingPromise = fetch("/api/contact", {
+    const bookingPromise = fetch(`${apiBaseUrl}/api/contact`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(form),
@@ -166,6 +196,7 @@ export default function Contact() {
 
     try {
       await bookingPromise;
+      setShowSuccessPopup(true);
       setForm({
         name: "",
         email: "",
@@ -185,6 +216,39 @@ export default function Contact() {
 
   return (
     <main className="overflow-hidden bg-[#f4f6f3] pt-24">
+      {showSuccessPopup ? (
+        <div className="fixed inset-0 z-[120] grid place-items-center bg-[#0d2924]/70 px-4 backdrop-blur-md">
+          <motion.div
+            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ type: "spring", stiffness: 230, damping: 22 }}
+            className="w-full max-w-md overflow-hidden rounded-[2rem] border border-white/40 bg-white text-center shadow-[0_30px_90px_rgba(13,41,36,.35)]"
+          >
+            <div className="bg-[#0d2924] px-8 py-7 text-white">
+              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#d8b678] text-[#0d2924] shadow-[0_18px_45px_rgba(216,182,120,.35)]">
+                <CheckCircle2 size={34} strokeWidth={2.4} />
+              </div>
+              <h2 className="mt-5 text-2xl font-semibold">Demo booked successfully</h2>
+              <p className="mt-2 text-sm leading-6 text-white/65">
+                Thank you. Our Enagic Bharat expert will contact you shortly.
+              </p>
+            </div>
+            <div className="px-8 py-6">
+              <p className="text-sm font-semibold text-black/60">
+                Redirecting to the main page in 5 seconds...
+              </p>
+              <div className="mt-5 h-2 overflow-hidden rounded-full bg-[#eee8dc]">
+                <motion.div
+                  initial={{ width: "100%" }}
+                  animate={{ width: "0%" }}
+                  transition={{ duration: 5, ease: "linear" }}
+                  className="h-full rounded-full bg-[#902b36]"
+                />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      ) : null}
       <section className="grain relative overflow-hidden bg-[#0d2924] pb-32 pt-20 text-white sm:pt-28">
         <div className="absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-[#902b36]/15 blur-[100px]" />
         <div className="absolute right-[8%] top-[5%] h-80 w-80 rounded-full bg-[#d8b678]/15 blur-[100px]" />
@@ -354,10 +418,11 @@ export default function Contact() {
                       type="tel"
                       inputMode="tel"
                       autoComplete="tel"
-                      pattern="(?:\+91[ -]?)?[6-9][0-9 -]{9,12}"
+                      maxLength={10}
+                      pattern="[6-9][0-9]{9}"
                       value={form.phone}
-                      onChange={update("phone")}
-                      placeholder="+91 98765 43210"
+                      onChange={updatePhone}
+                      placeholder="9876543210"
                     />
                   </Field>
                   <Field label="Pincode" error={errors.pincode}>

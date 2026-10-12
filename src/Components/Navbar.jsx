@@ -28,7 +28,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <img
-              src="/enagic-bharat-horizontal.png"
+              src="/enagic-bharat-horizontal.svg"
               alt="Enagic Bharat"
               className="h-11 w-auto max-w-[190px] object-contain sm:h-12 sm:max-w-[230px]"
             />

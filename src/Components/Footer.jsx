@@ -27,9 +27,9 @@ export default function Footer() {
           <div>
             <Link to="/" className="flex items-center gap-3">
               <img
-                src="/enagic-bharat-horizontal.png"
+                src="/enagic-bharat-horizontal.svg"
                 alt="Enagic Bharat"
-                className="h-16 w-auto max-w-[280px] object-contain"
+                className="h-16 w-auto max-w-[280px] rounded-2xl bg-white/95 p-2 object-contain"
               />
             </Link>
             <p className="mt-5 text-sm leading-7 text-white/45">
