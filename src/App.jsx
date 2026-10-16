@@ -1,5 +1,5 @@
 import { Routes, Route, useLocation, Link, Navigate } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { useLayoutEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { getProductSlug, products } from "./data/products";
 
@@ -31,7 +31,23 @@ function Home() {
 
 function App() {
   const location = useLocation();
+  useLayoutEffect(() => {
+    window.history.scrollRestoration = "manual";
+    const root = window.document.documentElement;
+    const previousScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    const restoreScrollBehavior = window.requestAnimationFrame(() => {
+      root.style.scrollBehavior = previousScrollBehavior;
+    });
+    return () => window.cancelAnimationFrame(restoreScrollBehavior);
+  }, [location.pathname]);
   const pathname = location.pathname.replace(/\/+$/, "") || "/";
+  const legalDocument = {
+    "/privacy-policy": "privacy",
+    "/terms-and-conditions": "terms",
+    "/refund-policy": "refund",
+  }[pathname];
   const productRoute = pathname.match(/^\/product\/([^/]+)$/)?.[1];
   const product = products.find(({ id, name }) =>
     getProductSlug(name) === productRoute || String(id) === productRoute
@@ -65,6 +81,10 @@ function App() {
       title: "Terms & Conditions | Enagic Bharat",
       description: "Read the terms for using the Enagic Bharat website, product information, enquiries and demo bookings.",
     },
+    "/refund-policy": {
+      title: "Refund Policy | Enagic Bharat",
+      description: "Read Enagic Bharat's refund request process, eligibility guidance and contact details for product orders.",
+    },
   }[pathname] ?? (product ? {
     title: `${product.name} Price in India | Enagic Bharat`,
     description: `Explore ${product.name} features, specifications and listed price in India. Contact Enagic Bharat in Jaipur for a personalised quote and product guidance.`,
@@ -85,8 +105,12 @@ function App() {
       </Helmet>
       <Navbar />
       <FloatingContact />
-      <AnimatePresence mode="wait" initial={false}>
-        <Routes location={location} key={location.pathname}>
+      {legalDocument ? (
+        <PageTransition>
+          <PrivacyTerms document={legalDocument} />
+        </PageTransition>
+      ) : (
+      <Routes>
           <Route path="/" element={<Home />} />
           <Route
             path="/our-story"
@@ -122,8 +146,6 @@ function App() {
               </PageTransition>
             }
           />
-          <Route path="/privacy-policy" element={<PrivacyTerms document="privacy" />} />
-          <Route path="/terms-and-conditions" element={<PrivacyTerms document="terms" />} />
           <Route
             path="/product/:slug"
             element={
@@ -146,8 +168,8 @@ function App() {
               </PageTransition>
             }
           />
-        </Routes>
-      </AnimatePresence>
+      </Routes>
+      )}
       <Footer />
     </>
   );

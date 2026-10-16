@@ -14,7 +14,6 @@ export default function Navbar() {
   const lightHome = location.pathname === "/";
   useEffect(() => {
     setOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [location.pathname]);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
