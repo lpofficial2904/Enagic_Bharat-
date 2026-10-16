@@ -125,7 +125,7 @@ function App() {
             path="*"
             element={
               <PageTransition>
-                <main className="surface-grid min-h-screen bg-[#f4f6f3] pt-40 text-center">
+                <main className="surface-grid min-h-screen bg-[#f4f7fc] pt-40 text-center">
                   <div className="page-shell">
                     <p className="eyebrow">404</p>
                     <h1 className="mt-4 text-4xl font-semibold">Page not found</h1>

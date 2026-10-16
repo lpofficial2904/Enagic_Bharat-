@@ -10,8 +10,6 @@ import {
   Mail,
   MapPin,
   Phone,
-  ShieldCheck,
-  Sparkles,
 } from "lucide-react";
 import {
   FaFacebookF,
@@ -215,130 +213,50 @@ export default function Contact() {
   };
 
   return (
-    <main className="overflow-hidden bg-[#f4f6f3] pt-24">
+    <main className="overflow-hidden bg-[#f4f7fc] pt-24">
       {showSuccessPopup ? (
-        <div className="fixed inset-0 z-[120] grid place-items-center bg-[#0d2924]/70 px-4 backdrop-blur-md">
+        <div className="fixed inset-0 z-[120] grid place-items-center bg-[#14243b]/45 px-4 backdrop-blur-md">
           <motion.div
             initial={{ opacity: 0, y: 24, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ type: "spring", stiffness: 230, damping: 22 }}
-            className="w-full max-w-md overflow-hidden rounded-[2rem] border border-white/40 bg-white text-center shadow-[0_30px_90px_rgba(13,41,36,.35)]"
+            className="w-full max-w-md overflow-hidden rounded-[2rem] border border-[#0b4db8]/10 bg-white text-center shadow-[0_30px_90px_rgba(19,48,88,.2)]"
           >
-            <div className="bg-[#0d2924] px-8 py-7 text-white">
-              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#d8b678] text-[#0d2924] shadow-[0_18px_45px_rgba(216,182,120,.35)]">
+            <div className="bg-gradient-to-br from-[#f4f7fc] to-[#e8eff9] px-8 py-7 text-[#14243b]">
+              <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#0b4db8] text-white shadow-[0_18px_45px_rgba(11,77,184,.24)]">
                 <CheckCircle2 size={34} strokeWidth={2.4} />
               </div>
               <h2 className="mt-5 text-2xl font-semibold">Demo booked successfully</h2>
-              <p className="mt-2 text-sm leading-6 text-white/65">
+              <p className="mt-2 text-sm leading-6 text-[#58677d]">
                 Thank you. Our Enagic Bharat expert will contact you shortly.
               </p>
             </div>
             <div className="px-8 py-6">
-              <p className="text-sm font-semibold text-black/60">
+              <p className="text-sm font-semibold text-[#58677d]">
                 Redirecting to the main page in 5 seconds...
               </p>
-              <div className="mt-5 h-2 overflow-hidden rounded-full bg-[#eee8dc]">
+              <div className="mt-5 h-2 overflow-hidden rounded-full bg-[#dce7f6]">
                 <motion.div
                   initial={{ width: "100%" }}
                   animate={{ width: "0%" }}
                   transition={{ duration: 5, ease: "linear" }}
-                  className="h-full rounded-full bg-[#902b36]"
+                  className="h-full rounded-full bg-[#0b4db8]"
                 />
               </div>
             </div>
           </motion.div>
         </div>
       ) : null}
-      <section className="grain relative overflow-hidden bg-[#0d2924] pb-32 pt-20 text-white sm:pt-28">
-        <div className="absolute left-[8%] top-[20%] h-72 w-72 rounded-full bg-[#902b36]/15 blur-[100px]" />
-        <div className="absolute right-[8%] top-[5%] h-80 w-80 rounded-full bg-[#d8b678]/15 blur-[100px]" />
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          className="page-shell relative text-center"
-        >
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 15 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="eyebrow inline-flex items-center gap-2"
-          >
-            <Sparkles size={14} /> Personal consultation
-          </motion.div>
-          <motion.h1
-            variants={{
-              hidden: { opacity: 0, y: 28 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="mx-auto mt-5 max-w-5xl text-5xl font-semibold leading-[1.02] sm:text-7xl lg:text-[5.5rem]"
-          >
-            Explore Kangen Water,{" "}
-            <span className="italic text-[#d8b678]">personally.</span>
-          </motion.h1>
-          <motion.p
-            variants={{
-              hidden: { opacity: 0, y: 18 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="mx-auto mt-7 max-w-2xl text-base leading-8 text-white/52 sm:text-lg"
-          >
-            Book a Kangen Water demo in Jaipur or ask about Enagic water ionizer
-            prices in India. Share your preferred model and city so our team can
-            help with a quote, model comparison and installation questions.
-          </motion.p>
-          <motion.div
-            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
-            className="mt-9 flex flex-wrap justify-center gap-5 text-xs font-semibold text-white/48"
-          >
-            {["No obligation", "Personal guidance", "Live water testing"].map(
-              (item) => (
-                <span key={item} className="flex items-center gap-2">
-                  <ShieldCheck size={15} className="text-[#d8b678]" />
-                  {item}
-                </span>
-              ),
-            )}
-          </motion.div>
-        </motion.div>
-      </section>
-
-      <section className="relative z-10 -mt-16 pb-28">
+      <section className="relative pb-24 pt-4 sm:pt-6">
         <div className="page-shell">
-          <div className="grid gap-5 md:grid-cols-3">
-            {contactCards.map(({ icon: Icon, label, value, href }, index) => (
-              <motion.a
-                key={label}
-                href={href}
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35 + index * 0.1 }}
-                className="group flex items-center gap-4 rounded-[1.6rem] border border-black/[.07] bg-white p-5 shadow-[0_20px_55px_rgba(27,25,20,.1)] transition hover:-translate-y-1 hover:shadow-[0_26px_65px_rgba(27,25,20,.14)] sm:p-6"
-              >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#eee8dc] text-[#a77a37] transition group-hover:bg-[#902b36] group-hover:text-white">
-                  <Icon size={19} />
-                </span>
-                <span>
-                  <small className="block text-[10px] font-bold uppercase tracking-[.16em] text-black/35">
-                    {label}
-                  </small>
-                  <strong className="mt-1 block text-sm sm:text-base">
-                    {value}
-                  </strong>
-                </span>
-              </motion.a>
-            ))}
-          </div>
-
-          <div className="mt-8 grid overflow-hidden rounded-[2.5rem] border border-black/[.07] bg-white shadow-[0_30px_90px_rgba(30,28,22,.09)] lg:grid-cols-[.68fr_1.32fr]">
-            <div className="relative overflow-hidden bg-[#0d2924] p-8 text-white sm:p-11">
-              <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full border-[45px] border-[#d8b678]/5" />
+          <div className="grid overflow-hidden rounded-[2.5rem] border border-black/[.07] bg-white shadow-[0_30px_90px_rgba(30,28,22,.09)] lg:grid-cols-[1.32fr_.68fr]">
+            <div className="relative order-2 overflow-hidden bg-[#eaf0f8] p-8 text-[#14243b] sm:p-11 lg:order-2">
+              <div className="absolute -bottom-24 -right-24 h-64 w-64 rounded-full border-[45px] border-[#0b4db8]/[.06]" />
               <p className="eyebrow">What to expect</p>
               <h2 className="mt-5 text-3xl font-semibold leading-tight sm:text-4xl">
                 A demonstration designed around you.
               </h2>
-              <p className="mt-5 text-sm leading-7 text-white/48">
+              <p className="mt-5 text-sm leading-7 text-[#58677d]">
                 Our expert will explain the technology clearly, answer your
                 questions and help you compare the models best suited to your
                 needs.
@@ -350,21 +268,21 @@ export default function Contact() {
                   ["03", "Receive honest product guidance"],
                 ].map(([number, text]) => (
                   <div key={number} className="flex items-center gap-4">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#d8b678]/25 text-xs font-bold text-[#d8b678]">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[#0b4db8]/20 text-xs font-bold text-[#0b4db8]">
                       {number}
                     </span>
-                    <span className="text-sm font-semibold text-white/70">
+                    <span className="text-sm font-semibold text-[#33445c]">
                       {text}
                     </span>
                   </div>
                 ))}
               </div>
-              <div className="relative mt-12 rounded-2xl border border-white/10 bg-white/[.04] p-5">
+              <div className="relative mt-12 rounded-2xl border border-[#0b4db8]/10 bg-white/70 p-5 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <Clock3 size={18} className="text-[#d8b678]" />
+                  <Clock3 size={18} className="text-[#0b4db8]" />
                   <div>
                     <strong className="block text-sm">Monday – Saturday</strong>
-                    <span className="text-xs text-white/40">
+                    <span className="text-xs text-[#66748b]">
                       9:00 AM – 7:00 PM
                     </span>
                   </div>
@@ -372,8 +290,8 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="relative p-6 sm:p-10 lg:p-12">
-              <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[#d8b678]/10 blur-3xl" />
+            <div className="relative order-1 p-6 sm:p-10 lg:order-1 lg:p-12">
+              <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[#c9a96e]/10 blur-3xl" />
               <div className="relative flex flex-col justify-between gap-4 border-b border-black/[.07] pb-7 sm:flex-row sm:items-end">
                 <div>
                   <p className="eyebrow">Reserve your experience</p>
@@ -382,7 +300,7 @@ export default function Contact() {
                   </h2>
                 </div>
                 <span className="flex items-center gap-2 text-xs font-semibold text-black/40">
-                  <CalendarCheck size={17} className="text-[#a77a37]" /> Takes
+                  <CalendarCheck size={17} className="text-[#138808]" /> Takes
                   less than 2 minutes
                 </span>
               </div>
@@ -494,7 +412,32 @@ export default function Contact() {
             </div>
           </div>
 
-          <div className="mt-16 flex flex-col items-center justify-between gap-7 rounded-[2rem] border border-black/[.07] bg-[#e7eeea] p-7 sm:flex-row sm:p-9">
+          <div className="mt-8 grid gap-5 md:grid-cols-3">
+            {contactCards.map(({ icon: Icon, label, value, href }, index) => (
+              <motion.a
+                key={label}
+                href={href}
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 + index * 0.1 }}
+                className="group flex items-center gap-4 rounded-[1.6rem] border border-black/[.07] bg-white p-5 shadow-[0_20px_55px_rgba(27,25,20,.1)] transition hover:-translate-y-1 hover:shadow-[0_26px_65px_rgba(27,25,20,.14)] sm:p-6"
+              >
+                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#e2ebf8] text-[#138808] transition group-hover:bg-[#0b4db8] group-hover:text-white">
+                  <Icon size={19} />
+                </span>
+                <span>
+                  <small className="block text-[10px] font-bold uppercase tracking-[.16em] text-black/35">
+                    {label}
+                  </small>
+                  <strong className="mt-1 block text-sm sm:text-base">
+                    {value}
+                  </strong>
+                </span>
+              </motion.a>
+            ))}
+          </div>
+
+          <div className="mt-16 flex flex-col items-center justify-between gap-7 rounded-[2rem] border border-black/[.07] bg-[#e8eff9] p-7 sm:flex-row sm:p-9">
             <div>
               <p className="eyebrow">Stay connected</p>
               <h3 className="mt-2 text-2xl font-semibold">
@@ -505,16 +448,16 @@ export default function Contact() {
               {[
                 [
                   FaFacebookF,
-                  "https://www.facebook.com/pintuattends",
+                  "https://www.facebook.com/",
                   "Facebook",
                 ],
                 [
                   FaInstagram,
-                  "https://www.instagram.com/pintuattends/",
+                  "https://www.instagram.com/",
                   "Instagram",
                 ],
-                [FaWhatsapp, "https://wa.me/917023320977", "WhatsApp"],
-                [FaYoutube, "https://www.youtube.com/@pintuattends", "YouTube"],
+                [FaWhatsapp, "https://wa.me/917357654577", "WhatsApp"],
+                [FaYoutube, "https://www.youtube.com/", "YouTube"],
               ].map(([Icon, href, label]) => (
                 <motion.a
                   whileHover={{ y: -4 }}
@@ -523,7 +466,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={label}
-                  className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white text-black/65 shadow-sm transition hover:bg-[#0d2924] hover:text-white"
+                  className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white text-black/65 shadow-sm transition hover:bg-[#101827] hover:text-white"
                 >
                   <Icon />
                 </motion.a>
@@ -544,7 +487,7 @@ function Field({ label, error, children }) {
       </span>
       {children}
       {error ? (
-        <span className="mt-2 block text-xs font-semibold text-[#902b36]">
+        <span className="mt-2 block text-xs font-semibold text-[#0b4db8]">
           {error}
         </span>
       ) : null}

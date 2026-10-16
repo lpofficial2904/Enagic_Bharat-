@@ -3,11 +3,11 @@
   <desc id="desc">Transparent Enagic Bharat logo with theme-colored mark, black internal details, and tricolor accents.</desc>
   <defs>
     <style>
-      .primary{fill:#0d2924}
-      .wine{fill:#902b36}
-      .gold{fill:#d8b678}
-      .bronze{fill:#a77a37}
-      .cream{fill:#fffaf2}
+      .primary{fill:#0b4db8}
+      .wine{fill:#0b4db8}
+      .gold{fill:#ff9933}
+      .bronze{fill:#138808}
+      .cream{fill:#ffffff}
       .word{font-family:Arial,Helvetica,sans-serif;font-weight:900}
     </style>
   </defs>

@@ -21,13 +21,13 @@ const questions = [
 
 export default function KangenQuestions() {
   return (
-    <div className="mt-16 border-t border-[#173d35]/10 pt-12">
+    <div className="mt-16 border-t border-[#073b8f]/10 pt-12">
       <p className="eyebrow">Before you choose</p>
       <h2 className="mt-4 text-3xl font-semibold sm:text-4xl">Kangen Water prices, models & demos</h2>
       <div className="mt-8 grid gap-4 md:grid-cols-2">
         {questions.map(({ question, answer }) => (
-          <details key={question} className="rounded-lg border border-[#173d35]/10 bg-white p-6">
-            <summary className="cursor-pointer text-lg font-semibold focus-visible:outline-2 focus-visible:outline-[#902b36]">{question}</summary>
+          <details key={question} className="rounded-lg border border-[#073b8f]/10 bg-white p-6">
+            <summary className="cursor-pointer text-lg font-semibold focus-visible:outline-2 focus-visible:outline-[#0b4db8]">{question}</summary>
             <p className="mt-4 text-sm leading-7 text-black/60">{answer}</p>
           </details>
         ))}

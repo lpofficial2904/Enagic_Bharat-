@@ -1,18 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Enagic Bharat">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="330 15 340 340" role="img" aria-labelledby="title">
+  <title id="title">Enagic Bharat</title>
   <defs>
     <style>
-      .blue{fill:#902b36}
-      .black{fill:#0d2924}
+      .primary{fill:#0b4db8}
+      .wine{fill:#0b4db8}
+      .gold{fill:#ff9933}
+      .cream{fill:#ffffff}
     </style>
   </defs>
-  <g transform="translate(128 128)">
-    <circle r="120" class="blue"/>
-    <circle r="105" class="black"/>
-    <circle r="91" class="blue"/>
-    <path class="black" d="M-70-74H53c22 0 40 4 54 13l20 42h-24c-7-12-14-21-24-26-9-5-21-7-37-7H-25V3h36c13 0 22-3 28-8 6-5 11-14 14-27h22v94H53c-3-14-7-24-14-30-6-6-16-9-28-9h-36v56h63c19 0 35-3 46-10 12-6 23-18 34-35h23l-25 54H-70V69h22V-55h-22Z"/>
-    <path class="black" d="M-99-51c-18 16-29 39-29 65 0 27 11 50 29 66 9-6 16-17 16-28v-75c0-12-7-22-16-28Z"/>
-    <path class="black" d="M70 59c0-31 25-56 56-56 22 0 42 13 50 32-4 36-25 67-54 85-30-2-52-27-52-57Z"/>
-    <circle cx="125" cy="63" r="22" class="black"/>
-    <path class="black" d="M-71 80c49-16 96-12 144 4 35 11 61 16 89-4-23 34-62 49-109 44-41-4-78-19-124-44Z"/>
+  <g transform="translate(500 185)">
+    <circle r="158" class="wine"/>
+    <circle r="137" class="gold"/>
+    <circle r="113" class="cream"/>
+    <text x="-12" y="68" text-anchor="middle" class="primary" font-family="Georgia,Times New Roman,serif" font-size="205" font-weight="900">E</text>
+    <path class="primary" d="M-110 76c65-26 127-20 190 1 42 14 78 20 119-5-29 42-75 62-135 56-54-5-103-26-174-52Z"/>
+    <path class="wine" d="M76 67c0-40 33-73 73-73 28 0 53 16 65 40-5 45-31 84-69 107-39-3-69-35-69-74Z"/>
+    <circle cx="148" cy="72" r="28" class="gold"/>
   </g>
 </svg>
