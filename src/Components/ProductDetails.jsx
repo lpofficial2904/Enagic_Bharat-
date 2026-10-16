@@ -32,7 +32,7 @@ export default function ProductDetails() {
               <p className="leading-7 text-black/55">{product.longDescription}</p>
               <div className="mt-8 flex flex-wrap items-end justify-between gap-5">
                 <div><span className="text-xs uppercase tracking-widest text-black/40">Total amount</span><div className="mt-1 text-3xl font-bold text-[#0b4db8] sm:text-4xl">{product.price}</div></div>
-                <Link to="/contact" className="button-primary w-full sm:w-auto">Book a free demo</Link>
+                <Link to="/contact" className="button-primary w-full sm:w-auto">Add to cart</Link>
               </div>
               <div className="mt-8 overflow-hidden border border-[#073b8f]/10">
                 {[

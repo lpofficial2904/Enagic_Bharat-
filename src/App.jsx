@@ -15,6 +15,7 @@ import Aboutus from "./Components/Aboutus";
 import TrustBar from "./Components/TrustBar";
 import PremiumExperience from "./Components/PremiumExperience";
 import FloatingContact from "./Components/FloatingContact";
+import PrivacyTerms from "./pages/PrivacyTerms";
 
 function Home() {
   return (
@@ -55,6 +56,14 @@ function App() {
     "/office": {
       title: "Kangen Water Demo in Jaipur | Enagic Bharat Office",
       description: "Visit Enagic Bharat in Jaipur, Rajasthan, for Kangen Water machine guidance. Contact our team to arrange a demo and discuss models and pricing.",
+    },
+    "/privacy-policy": {
+      title: "Privacy Policy | Enagic Bharat",
+      description: "Learn how Enagic Bharat handles personal information submitted through our website, product enquiries and demo booking forms.",
+    },
+    "/terms-and-conditions": {
+      title: "Terms & Conditions | Enagic Bharat",
+      description: "Read the terms for using the Enagic Bharat website, product information, enquiries and demo bookings.",
     },
   }[pathname] ?? (product ? {
     title: `${product.name} Price in India | Enagic Bharat`,
@@ -113,6 +122,8 @@ function App() {
               </PageTransition>
             }
           />
+          <Route path="/privacy-policy" element={<PrivacyTerms document="privacy" />} />
+          <Route path="/terms-and-conditions" element={<PrivacyTerms document="terms" />} />
           <Route
             path="/product/:slug"
             element={

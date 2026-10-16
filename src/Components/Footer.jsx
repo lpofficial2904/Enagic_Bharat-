@@ -100,6 +100,10 @@ export default function Footer() {
           <p>© 2026 Enagic Bharat. All rights reserved.</p>
           <p>Japanese precision • Indian hospitality</p>
         </div>
+        <nav aria-label="Legal" className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-[#66748b]">
+          <Link className="transition hover:text-[#0b4db8]" to="/terms-and-conditions">Terms &amp; Conditions</Link>
+          <Link className="transition hover:text-[#0b4db8]" to="/privacy-policy">Privacy Policy</Link>
+        </nav>
       </div>
     </footer>
   );
