@@ -82,8 +82,8 @@ function App() {
       description: "Read the terms for using the Enagic Bharat website, product information, enquiries and demo bookings.",
     },
     "/refund-policy": {
-      title: "Refund Policy | Enagic Bharat",
-      description: "Read Enagic Bharat's refund request process, eligibility guidance and contact details for product orders.",
+      title: "Return, Refund & Exchange Policy | Enagic Bharat",
+      description: "Review Enagic Bharat's 30-day return window, free return shipping, exchanges and refund processing for orders in India.",
     },
   }[pathname] ?? (product ? {
     title: `${product.name} Price in India | Enagic Bharat`,
