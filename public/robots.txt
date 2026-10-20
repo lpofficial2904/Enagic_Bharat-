@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://enagicbharat.online/sitemap.xml

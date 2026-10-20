@@ -227,3 +227,11 @@ export const products = allProducts
 
 export const getProductSlug = (name) =>
   name.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
+export const getCanonicalProductSlug = (product) => ({
+  1: "leveluk-k8",
+  2: "leveluk-sd501dx",
+  4: "leveluk-super-501",
+  5: "leveluk-jr-iv",
+  7: "leveluk-anespa-dx",
+}[product.id] ?? getProductSlug(product.name));

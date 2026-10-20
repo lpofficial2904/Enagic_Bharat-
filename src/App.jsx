@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation, Link, Navigate } from "react-router-dom";
 import { useLayoutEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { getProductSlug, products } from "./data/products";
+import { getCanonicalProductSlug, products } from "./data/products";
 
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
@@ -47,11 +47,11 @@ function App() {
     "/privacy-policy": "privacy",
     "/terms-and-conditions": "terms",
     "/refund-policy": "refund",
+    "/shipping-policy": "shipping",
   }[pathname];
   const productRoute = pathname.match(/^\/product\/([^/]+)$/)?.[1];
-  const product = products.find(({ id, name }) =>
-    getProductSlug(name) === productRoute || String(id) === productRoute
-  );
+  const product = products.find(({ id }) => String(id) === productRoute)
+    ?? products.find((item) => getCanonicalProductSlug(item) === productRoute);
   const metadata = {
     "/": {
       title: "Kangen Water Machines India & Jaipur | Enagic Bharat",
@@ -83,11 +83,15 @@ function App() {
     },
     "/refund-policy": {
       title: "Return, Refund & Exchange Policy | Enagic Bharat",
-      description: "Review Enagic Bharat's 30-day return window, free return shipping, exchanges and refund processing for orders in India.",
+      description: "Contact Enagic Bharat to confirm return, refund, exchange and shipping terms for a specific product order.",
+    },
+    "/shipping-policy": {
+      title: "Shipping Policy | Enagic Bharat",
+      description: "Contact Enagic Bharat to confirm shipping charges and delivery estimates for a product order.",
     },
   }[pathname] ?? (product ? {
-    title: `${product.name} Price in India | Enagic Bharat`,
-    description: `Explore ${product.name} features, specifications and listed price in India. Contact Enagic Bharat in Jaipur for a personalised quote and product guidance.`,
+    title: `${product.name} | Enagic Bharat Product Enquiry`,
+    description: `Explore ${product.name} features and specifications. Contact Enagic Bharat to confirm current price, availability and product details.`,
   } : {
     title: "Page Not Found | Enagic Bharat",
     description: "The page you are looking for could not be found.",
@@ -100,6 +104,9 @@ function App() {
         <meta name="description" content={metadata.description} />
         <meta property="og:title" content={metadata.title} />
         <meta property="og:description" content={metadata.description} />
+        <meta property="og:url" content={`https://enagicbharat.online${pathname}`} />
+        <meta property="og:image" content="https://enagicbharat.online/enagic-bharat-logo.png" />
+        <link rel="canonical" href={`https://enagicbharat.online${pathname}`} />
         <meta name="twitter:title" content={metadata.title} />
         <meta name="twitter:description" content={metadata.description} />
       </Helmet>

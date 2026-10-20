@@ -45,7 +45,8 @@ export default function Footer() {
               {[
                 ["Home", "/"],
                 ["Products", "/products"],
-                ["Our story", "/our-story"],
+                ["About Us", "/our-story"],
+                ["Contact Us", "/contact"],
                 ["Office", "/office"],
               ].map(([x, to]) => (
                 <Link className="block transition hover:text-[#0b4db8]" key={x} to={to}>
@@ -104,6 +105,7 @@ export default function Footer() {
           <Link className="transition-colors hover:text-[#0b4db8]" to="/terms-and-conditions">Terms &amp; Conditions</Link>
           <Link className="transition-colors hover:text-[#0b4db8]" to="/privacy-policy">Privacy Policy</Link>
           <Link className="transition-colors hover:text-[#0b4db8]" to="/refund-policy">Refund Policy</Link>
+          <Link className="transition-colors hover:text-[#0b4db8]" to="/shipping-policy">Shipping Policy</Link>
         </nav>
       </div>
     </footer>

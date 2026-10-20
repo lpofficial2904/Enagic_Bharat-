@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
 import {
   ArrowRight,
@@ -29,13 +29,13 @@ const contactCards = [
     icon: Mail,
     label: "Write to us",
     value: "enagicbharat1974@gmail.com",
-    href: "enagicbharat1974@gmail.com",
+    href: "mailto:enagicbharat1974@gmail.com",
   },
   {
     icon: MapPin,
     label: "Experience centre",
     value: "Enagic Bharat, Shiv Shakti Complex, Meena Market, Mansarover, Narayan Vihar, Jaipur, Rajasthan 302020",
-    href: "/#/office",
+    href: "/office",
   },
 ];
 
@@ -101,7 +101,8 @@ function validateForm(values) {
 }
 
 export default function Contact() {
-  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const selectedProduct = searchParams.get("product")?.trim() ?? "";
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -114,16 +115,6 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
-
-  useEffect(() => {
-    if (!showSuccessPopup) return undefined;
-
-    const redirectTimer = window.setTimeout(() => {
-      navigate("/");
-    }, 5000);
-
-    return () => window.clearTimeout(redirectTimer);
-  }, [navigate, showSuccessPopup]);
 
   const update = (key) => (event) => {
     const value = event.target.value;
@@ -165,7 +156,12 @@ export default function Contact() {
     const bookingPromise = fetch(`${apiBaseUrl}/api/contact`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify({
+        ...form,
+        message: selectedProduct
+          ? `Product enquiry: ${selectedProduct}\n\n${form.message}`
+          : form.message,
+      }),
     }).then(async (response) => {
       const text = await response.text();
       let data = {};
@@ -226,23 +222,13 @@ export default function Contact() {
               <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#0b4db8] text-white shadow-[0_18px_45px_rgba(11,77,184,.24)]">
                 <CheckCircle2 size={34} strokeWidth={2.4} />
               </div>
-              <h2 className="mt-5 text-2xl font-semibold">Demo booked successfully</h2>
+              <h2 className="mt-5 text-2xl font-semibold">Enquiry received</h2>
               <p className="mt-2 text-sm leading-6 text-[#58677d]">
-                Thank you. Our Enagic Bharat expert will contact you shortly.
+                Thank you. Your enquiry was sent successfully. Our Enagic Bharat team will follow up using the details you provided.
               </p>
             </div>
             <div className="px-8 py-6">
-              <p className="text-sm font-semibold text-[#58677d]">
-                Redirecting to the main page in 5 seconds...
-              </p>
-              <div className="mt-5 h-2 overflow-hidden rounded-full bg-[#dce7f6]">
-                <motion.div
-                  initial={{ width: "100%" }}
-                  animate={{ width: "0%" }}
-                  transition={{ duration: 5, ease: "linear" }}
-                  className="h-full rounded-full bg-[#0b4db8]"
-                />
-              </div>
+              <button type="button" onClick={() => setShowSuccessPopup(false)} className="button-primary">Close</button>
             </div>
           </motion.div>
         </div>
@@ -294,9 +280,9 @@ export default function Contact() {
               <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[#c9a96e]/10 blur-3xl" />
               <div className="relative flex flex-col justify-between gap-4 border-b border-black/[.07] pb-7 sm:flex-row sm:items-end">
                 <div>
-                  <p className="eyebrow">Reserve your experience</p>
+                    <p className="eyebrow">Product enquiry</p>
                   <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">
-                    Book your free demo
+                    {selectedProduct ? `Ask about ${selectedProduct}` : "Request product details"}
                   </h2>
                 </div>
                 <span className="flex items-center gap-2 text-xs font-semibold text-black/40">
@@ -404,7 +390,7 @@ export default function Contact() {
                     disabled={isSubmitting}
                     className="button-primary min-w-52 py-4 disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {isSubmitting ? "Reserving..." : "Reserve My Demo"}{" "}
+                    {isSubmitting ? "Sending..." : "Send Enquiry"}{" "}
                     <ArrowRight size={17} />
                   </motion.button>
                 </div>

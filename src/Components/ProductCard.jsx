@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { getProductSlug } from "../data/products";
+import { getCanonicalProductSlug } from "../data/products";
 
 export default function ProductCard({ product, index=0 }) {
   return (
     <motion.article variants={{hidden:{opacity:0,y:35},show:{opacity:1,y:0,transition:{duration:.65,ease:[.22,1,.36,1]}}}}
       whileHover={{y:-7}} className="luxury-shine group flex min-h-[470px] flex-col overflow-hidden rounded-lg border border-[#073b8f]/10 bg-white shadow-[0_18px_55px_rgba(7,35,83,.07)] transition-shadow hover:shadow-[0_28px_70px_rgba(7,35,83,.14)] sm:min-h-[510px]">
-      <Link to={`/product/${getProductSlug(product.name)}`} aria-label={`View ${product.name} details`} className="flex flex-1 flex-col focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#0b4db8]">
+      <Link to={`/product/${getCanonicalProductSlug(product)}`} aria-label={`View ${product.name} details`} className="flex flex-1 flex-col focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-[#0b4db8]">
       <div className="relative h-60 overflow-hidden bg-gradient-to-b from-[#f1f6ff] to-[#e2ebf8] sm:h-72">
         <span className="absolute left-5 top-5 z-10 border-l-2 border-[#0b4db8] bg-white/75 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[.16em] backdrop-blur">Model 0{index+1}</span>
         <motion.img src={product.image} alt={product.name} className="h-full w-full object-contain p-6 mix-blend-multiply" whileHover={{scale:1.055}} transition={{duration:.55}}/>
@@ -18,7 +18,7 @@ export default function ProductCard({ product, index=0 }) {
         <h3 className="mt-2 text-2xl font-semibold">{product.name}</h3>
         <p className="mt-3 line-clamp-2 text-sm leading-6 text-black/50">{product.description}</p>
         <div className="mt-auto flex items-center justify-between border-t border-[#073b8f]/10 pt-5">
-          <div><span className="block text-[10px] uppercase tracking-widest text-black/40">Total amount</span><span className="mt-1 block text-xl font-bold text-[#0b4db8]">{product.price}</span></div>
+          <div><span className="block text-[10px] uppercase tracking-widest text-black/40">Listed price</span><span className="mt-1 block text-xl font-bold text-[#0b4db8]">{product.price}</span></div>
           <span className="flex h-11 items-center gap-2 rounded-md bg-[#073b8f] px-4 text-xs font-bold text-white transition group-hover:bg-[#0b4db8]">Details <ArrowRight size={16}/></span>
         </div>
       </div>

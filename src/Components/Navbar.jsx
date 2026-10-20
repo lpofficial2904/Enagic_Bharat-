@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Menu, X } from "lucide-react";
+import logo from "../assets/logo.svg";
 
 const links = [
   ["Home", "/"], ["Products", "/products"], ["Our Story", "/our-story"], ["Office", "/office"]
@@ -28,7 +29,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-3">
             <img
-              src="/enagic-bharat-horizontal.svg"
+              src={logo}
               alt="Enagic Bharat"
               className="h-11 w-auto max-w-[190px] object-contain sm:h-12 sm:max-w-[230px]"
             />
