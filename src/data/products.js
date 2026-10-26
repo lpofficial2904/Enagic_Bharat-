@@ -1,7 +1,7 @@
 import k8Model from "../assets/levelluk-k8-img.jpg"; 
 import sd501dxModel from "../assets/banner-img-product-sd501dx.jpg"; 
 import sd501Platinum from "../assets/sd501platinum_1.png"; 
-import super501 from "../assets/Super-501-3-1.jpg"; 
+import super501 from "../assets/Leveluk Super 501.png";
 import sd501u from "../assets/product-img-sd501u-2-2x.jpg";
 import jrIv from "../assets/The New Leveluk JRIV!.jpg"; 
 import anespaModel from "../assets/LeveLuk-Anespa-DX.jpg";
@@ -13,7 +13,7 @@ const allProducts = [
     id: 1,
     name: "Leveluk K8",
     image: k8Model,
-    price: "₹3,80,000",
+    price: "₹3,22,033",
     description: "Flagship touchscreen system for feature-focused homes",
     longDescription: "Designed for households that want Enagic's most advanced countertop experience, the Leveluk K8 pairs an eight-plate chamber with a colour touch display and multi-voltage compatibility. Its guided interface makes everyday operation approachable while retaining the flexibility expected from a flagship system.",
     specifications: [
@@ -35,7 +35,7 @@ const allProducts = [
     id: 2,
     name: "Leveluk SD501DX",
     image: sd501dxModel,
-    price: "₹3,40,000",
+    price: "₹2,88,135",
     description: "Modern seven-plate performance with guided controls",
     longDescription: "The SD501DX refreshes Enagic's established seven-plate format with a prominent display and straightforward one-touch operation. It suits buyers who value familiar countertop performance presented through a cleaner, more contemporary interface.",
     specifications: [
@@ -79,7 +79,7 @@ const allProducts = [
     id: 4,
     name: "Leveluk Super 501",
     image: super501,
-    price: "₹4,40,000",
+    price: "₹3,72,880",
     description: "High-capacity configuration for demanding daily use",
     longDescription: "Created for settings where output matters, the Super 501 uses twelve plates across two electrolysis chambers. Its capacity makes it a practical candidate for larger households, shared workplaces and other environments with frequent daily use.",
     specifications: [
@@ -101,7 +101,7 @@ const allProducts = [
     id: 5,
     name: "Leveluk Jr IV",
     image: jrIv,
-    price: "₹2,40,000",
+    price: "₹2,03,389",
     description: "Compact four-plate system for lighter routines",
     longDescription: "The Jr IV brings core Enagic functionality into a smaller, lower-power format built around four solid plates. It is best considered for individuals or couples with moderate output needs, while busier households may benefit from a higher-capacity model.",
     specifications: [
@@ -146,7 +146,7 @@ const allProducts = [
     id: 7,
     name: "LeveLuk Anespa DX",
     image: anespaModel, 
-    price: "₹2,20,000",
+    price: "₹1,86,440",
     description: "Bathroom filtration designed as a considered ritual",
     longDescription: "The Anespa DX is a bathroom-focused system that filters shower and bath water while incorporating a mineral cartridge. Its generous flow and spa-minded format are intended for users seeking a more refined bathing routine at home.",
     specifications: [
@@ -189,29 +189,26 @@ const allProducts = [
   }
 ];
 
-const screenshotPricing = {
-  1: { price: 322033.90, productTax: 57966.10, shipping: 1694.92, shippingTax: 305.08, totalAmount: 382000 },
-  2: { price: 288135.58, productTax: 51864.42, shipping: 1694.92, shippingTax: 305.08, totalAmount: 342000 },
-  4: { price: 372881.36, productTax: 67118.64, shipping: 2542.38, shippingTax: 457.62, totalAmount: 443000 },
-  5: { price: 203389.84, productTax: 36610.16, shipping: 1694.92, shippingTax: 305.08, totalAmount: 242000 },
-  7: { price: 186440.68, productTax: 33559.32, shipping: 1694.92, shippingTax: 305.08, totalAmount: 222000 },
-};
-
 const roundMoney = (amount) => Math.round(amount * 100) / 100;
-const formatWholeRupees = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
+const formatRupees = new Intl.NumberFormat("en-IN", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 const hiddenProductIds = new Set([3, 6, 8]);
 
 export const products = allProducts
   .filter(({ id }) => !hiddenProductIds.has(id))
   .map((product) => {
     const listedAmount = Number(product.price.replace(/[^\d]/g, ""));
-    const taxablePrice = roundMoney(listedAmount / 1.18);
-    const pricing = screenshotPricing[product.id] ?? {
-      price: taxablePrice,
-      productTax: roundMoney(listedAmount - taxablePrice),
-      shipping: 1694.92,
-      shippingTax: 305.08,
-      totalAmount: listedAmount + 2000,
+    const productTax = roundMoney(listedAmount * 0.18);
+    const shipping = product.id === 4 ? 2542.38 : 1694.92;
+    const shippingTax = product.id === 4 ? 457.62 : 305.08;
+    const pricing = {
+      price: listedAmount,
+      productTax,
+      shipping,
+      shippingTax,
+      totalAmount: roundMoney(listedAmount + productTax + shipping + shippingTax),
     };
 
     return {
@@ -221,7 +218,7 @@ export const products = allProducts
         processingFee: 0,
         processingFeeTax: 0,
       },
-      price: `₹${formatWholeRupees.format(pricing.totalAmount)}`,
+      price: `₹${formatRupees.format(listedAmount)}`,
     };
   });
 

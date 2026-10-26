@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+import { products } from "../data/products";
 import {
   ArrowRight,
   CalendarCheck,
@@ -84,6 +85,8 @@ const validators = {
     return "";
   },
   timeSlot: (value) => (!value ? "Please choose a preferred time slot." : ""),
+  product: (value) => products.some(({ name }) => name === value)
+    ? "" : "Please choose a product.",
   message: (value) => {
     const trimmed = value.trim();
     if (!trimmed) return "Please tell us how we can help.";
@@ -102,7 +105,8 @@ function validateForm(values) {
 
 export default function Contact() {
   const [searchParams] = useSearchParams();
-  const selectedProduct = searchParams.get("product")?.trim() ?? "";
+  const requestedProduct = searchParams.get("product")?.trim() ?? "";
+  const initialProduct = products.find(({ name }) => name === requestedProduct)?.name ?? "";
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -110,11 +114,19 @@ export default function Contact() {
     city: "",
     pincode: "",
     timeSlot: "",
+    product: initialProduct,
     message: "",
   });
+  const selectedProduct = products.find(({ name }) => name === form.product);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+  useEffect(() => {
+    if (!showSuccessPopup) return;
+    const timer = setTimeout(() => setShowSuccessPopup(false), 5000);
+    return () => clearTimeout(timer);
+  }, [showSuccessPopup]);
 
   const update = (key) => (event) => {
     const value = event.target.value;
@@ -158,9 +170,7 @@ export default function Contact() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...form,
-        message: selectedProduct
-          ? `Product enquiry: ${selectedProduct}\n\n${form.message}`
-          : form.message,
+        productPrice: selectedProduct.price,
       }),
     }).then(async (response) => {
       const text = await response.text();
@@ -176,7 +186,11 @@ export default function Contact() {
       }
       if (!response.ok || !data.success) {
         if (data.errors) setErrors(data.errors);
-        throw new Error(data.message || "Unable to book your demo");
+        throw new Error(data.message || (
+          response.status >= 500
+            ? "Contact server is unavailable. Please make sure the backend is running and try again."
+            : "Unable to send your enquiry. Please try again."
+        ));
       }
       return data;
     });
@@ -198,6 +212,7 @@ export default function Contact() {
         city: "",
         pincode: "",
         timeSlot: "",
+        product: initialProduct,
         message: "",
       });
       setErrors({});
@@ -282,7 +297,7 @@ export default function Contact() {
                 <div>
                     <p className="eyebrow">Product enquiry</p>
                   <h2 className="mt-3 text-3xl font-semibold sm:text-4xl">
-                    {selectedProduct ? `Ask about ${selectedProduct}` : "Request product details"}
+                    {selectedProduct ? `Ask about ${selectedProduct.name}` : "Request product details"}
                   </h2>
                 </div>
                 <span className="flex items-center gap-2 text-xs font-semibold text-black/40">
@@ -366,6 +381,26 @@ export default function Contact() {
                       <option key={slot}>{slot}</option>
                     ))}
                   </select>
+                </Field>
+                <Field label="Product" error={errors.product}>
+                  <select
+                    className="input-premium"
+                    required
+                    value={form.product}
+                    onChange={update("product")}
+                  >
+                    <option value="">Choose a product</option>
+                    {products.map((product) => (
+                      <option key={product.id} value={product.name}>
+                        {product.name} — {product.price}
+                      </option>
+                    ))}
+                  </select>
+                  {selectedProduct && (
+                    <span className="mt-2 block text-sm font-semibold text-[#0b4db8]">
+                      Listed price: {selectedProduct.price}
+                    </span>
+                  )}
                 </Field>
                 <Field label="How can we help?" error={errors.message}>
                   <textarea
