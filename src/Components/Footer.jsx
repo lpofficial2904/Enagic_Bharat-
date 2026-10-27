@@ -19,7 +19,7 @@ export default function Footer() {
               Choose with clarity. Live with confidence.
             </h2>
           </div>
-          <Link to="/contact" className="button-primary shrink-0 px-7 py-4">
+          <Link to="/book" className="button-primary shrink-0 px-7 py-4">
             Book a free demo <ArrowUpRight size={18} />
           </Link>
         </motion.div>
@@ -46,7 +46,7 @@ export default function Footer() {
                 ["Home", "/"],
                 ["Products", "/products"],
                 ["About Us", "/our-story"],
-                ["Contact Us", "/contact"],
+                ["Contact Us", "/book"],
                 ["Office", "/office"],
               ].map(([x, to]) => (
                 <Link className="block transition hover:text-[#0b4db8]" key={x} to={to}>

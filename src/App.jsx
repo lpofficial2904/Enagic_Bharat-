@@ -61,7 +61,7 @@ function App() {
       title: "Our Story | Enagic Bharat",
       description: "Meet Enagic Bharat in Jaipur, Rajasthan. Get personal guidance on Kangen Water machines, model comparisons and demonstrations for your home.",
     },
-    "/contact": {
+    "/book": {
       title: "Kangen Water Demo & Price Enquiry | Enagic Bharat",
       description: "Book a Kangen Water demo in Jaipur. Ask Enagic Bharat about Leveluk K8 prices, compare water ionizers and request a personalised product quote.",
     },
@@ -129,7 +129,7 @@ function App() {
           />
           <Route path="/aboutus" element={<Navigate to="/our-story" replace />} />
           <Route
-            path="/contact"
+            path="/book"
             element={
               <PageTransition>
                 <Contact />

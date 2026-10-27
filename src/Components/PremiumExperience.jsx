@@ -94,7 +94,7 @@ export default function PremiumExperience() {
                 </div>
               ))}
             </div>
-            <Link to="/contact" className="button-dark mt-10">Schedule your experience <ArrowUpRight size={18} /></Link>
+            <Link to="/book" className="button-dark mt-10">Schedule your experience <ArrowUpRight size={18} /></Link>
           </motion.div>
         </div>
       </section>

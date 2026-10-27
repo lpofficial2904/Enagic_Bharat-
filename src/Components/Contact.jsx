@@ -123,6 +123,15 @@ export default function Contact() {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   useEffect(() => {
+    setForm((current) => ({ ...current, product: initialProduct }));
+    setErrors((current) => {
+      const next = { ...current };
+      delete next.product;
+      return next;
+    });
+  }, [initialProduct]);
+
+  useEffect(() => {
     if (!showSuccessPopup) return;
     const timer = setTimeout(() => setShowSuccessPopup(false), 5000);
     return () => clearTimeout(timer);
@@ -392,15 +401,10 @@ export default function Contact() {
                     <option value="">Choose a product</option>
                     {products.map((product) => (
                       <option key={product.id} value={product.name}>
-                        {product.name} — {product.price}
+                        {product.name}
                       </option>
                     ))}
                   </select>
-                  {selectedProduct && (
-                    <span className="mt-2 block text-sm font-semibold text-[#0b4db8]">
-                      Listed price: {selectedProduct.price}
-                    </span>
-                  )}
                 </Field>
                 <Field label="How can we help?" error={errors.message}>
                   <textarea
@@ -425,7 +429,7 @@ export default function Contact() {
                     disabled={isSubmitting}
                     className="button-primary min-w-52 py-4 disabled:cursor-not-allowed disabled:opacity-60"
                   >
-                    {isSubmitting ? "Sending..." : "Send Enquiry"}{" "}
+                    {isSubmitting ? "Sending..." : "Get Now"}{" "}
                     <ArrowRight size={17} />
                   </motion.button>
                 </div>

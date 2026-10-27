@@ -81,7 +81,7 @@ export default function ProductDetails() {
                   </p>
                 </div>
                 <Link
-                  to={`/contact?product=${encodeURIComponent(product.name)}`}
+                  to={`/book?product=${encodeURIComponent(product.name)}`}
                   className="button-primary w-full sm:w-auto"
                 >
                   Add to cart
@@ -109,7 +109,7 @@ export default function ProductDetails() {
                   <Link to="/refund-policy" className="hover:underline">
                     Return &amp; Refund Policy
                   </Link>
-                  <Link to="/contact" className="hover:underline">
+                  <Link to="/book" className="hover:underline">
                     Contact Us
                   </Link>
                 </nav>

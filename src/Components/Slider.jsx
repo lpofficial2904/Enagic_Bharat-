@@ -24,7 +24,7 @@ export default function Slider() {
           </motion.p>
           <motion.div variants={{hidden:{opacity:0,y:20},show:{opacity:1,y:0}}} className="mt-7 flex flex-wrap gap-3 sm:mt-9">
             <Link to="/products" className="button-primary w-full px-7 py-4 sm:w-auto">Compare models & prices <ArrowRight size={18}/></Link>
-            <Link to="/contact" className="flex w-full items-center justify-center gap-3 rounded-full border border-[#073b8f]/20 bg-white/40 px-6 py-4 font-semibold text-[#14243b] transition hover:border-[#0b4db8] hover:bg-[#0b4db8] hover:text-white sm:w-auto"><Play size={17} fill="currentColor"/> Book a Kangen Water demo</Link>
+            <Link to="/book" className="flex w-full items-center justify-center gap-3 rounded-full border border-[#073b8f]/20 bg-white/40 px-6 py-4 font-semibold text-[#14243b] transition hover:border-[#0b4db8] hover:bg-[#0b4db8] hover:text-white sm:w-auto"><Play size={17} fill="currentColor"/> Book a Kangen Water demo</Link>
           </motion.div>
           <motion.div variants={{hidden:{opacity:0},show:{opacity:1}}} className="mt-9 grid grid-cols-1 gap-3 border-t border-[#073b8f]/10 pt-5 text-xs text-[#526176] min-[390px]:grid-cols-2 sm:mt-12 sm:flex sm:flex-wrap sm:gap-x-8 sm:gap-y-3 sm:pt-6 sm:text-sm">
             {["Japanese-built systems","Personal demonstrations","Local guidance"].map(x=><span key={x} className="flex items-center gap-2"><ShieldCheck size={16} className="text-[#c9a96e]"/>{x}</span>)}

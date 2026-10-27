@@ -33,7 +33,7 @@ export default function KangenQuestions() {
         ))}
       </div>
       <div className="mt-8 flex flex-wrap items-center gap-5">
-        <Link to="/contact" className="button-dark">Request a quote or demo</Link>
+        <Link to="/book" className="button-dark">Request a quote or demo</Link>
         <p className="max-w-lg text-sm leading-6 text-black/55">Share your city and preferred model for pricing and personal guidance.</p>
       </div>
     </div>

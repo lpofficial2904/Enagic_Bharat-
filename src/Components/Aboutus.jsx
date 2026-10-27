@@ -327,7 +327,7 @@ export default function Aboutus() {
                 </h2>
               </div>
               <Link
-                to="/contact"
+                to="/book"
                 className="flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-4 font-bold text-[#101827] transition hover:-translate-y-1 hover:shadow-2xl"
               >
                 Book a Kangen Water demo <ArrowRight size={18} />

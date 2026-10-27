@@ -32,7 +32,7 @@ export default function Office() {
             <p className="text-sm leading-7 text-[#58677d] sm:text-base">
               Visit our Jaipur studio for a personal demonstration, clear answers and help choosing the right system for your home.
             </p>
-            <Link to="/contact" className="button-primary py-3">
+            <Link to="/book" className="button-primary py-3">
               Book your visit <ArrowUpRight size={17} />
             </Link>
           </div>
